@@ -27,5 +27,4 @@ TODOs for individual existing packages.
 ## BINSEC
 
 * Upgrade to version 0.8.1
-* Enable the BINSEC test suite (requires more packages, e.g. qcheck)
 * Improve descriptions of added OCaml libraries

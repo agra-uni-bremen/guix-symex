@@ -165,10 +165,9 @@ executable binaries and libraries, it is provided by Dune.")
        (sha256
         (base32 "0bqlx15hnbsks9rsys7zlzwpdkykcja7iqd5729gksxqj344hcrq"))))
     (build-system dune-build-system)
-    (arguments
-     (list
-      #:tests? #f))
-    (inputs (list gmp))
+    (native-inputs (list gmp
+                         ocaml-qcheck
+                         ocaml-ounit2))
     (propagated-inputs (list ocaml-base
                              ocaml-dune-site
                              ocaml-menhir

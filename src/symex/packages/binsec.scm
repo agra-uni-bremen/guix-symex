@@ -55,14 +55,15 @@ parser, a serializer and a printer for TOML.")
 (define-public ocaml-pp
   (package
     (name "ocaml-pp")
-    (version "1.1.2")
+    (version "1.2.0")
     (source
      (origin
        (method url-fetch)
-       (uri
-        "https://github.com/ocaml-dune/pp/releases/download/1.1.2/pp-1.1.2.tbz")
+       (uri (string-append
+             "https://github.com/ocaml-dune/pp/releases/download/" version
+             "/pp-" version ".tbz"))
        (sha256
-        (base32 "0mhxmzsraid4yw18zr6pyjfrhvf873ls8vfd1yapdfxijs6yk974"))))
+        (base32 "174hwr63gpliw9w2ipzjbkvdib7js6n6xicyn8nv9bsm7ibj5s55"))))
     (build-system dune-build-system)
     (native-inputs (list ocaml-ppx-expect))
     (home-page "https://github.com/ocaml-dune/pp")

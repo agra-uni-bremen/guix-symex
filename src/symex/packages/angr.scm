@@ -48,7 +48,7 @@
 (define-public python-capstone
   (package-with-patches
     engineering:python-capstone
-    (search-patches "capstone-fix-python-constants.patch")))
+    (search-patches "python-capstone-fix-python-constants.patch")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -323,8 +323,8 @@ extracting type information.")
     (version "9.2.46")
     (source (origin
               (method git-fetch)
-              (patches (search-patches "angr-addition-type-error.patch"
-                                       "angr-check-exec-deps.patch"))
+              (patches (search-patches "python-angr-addition-type-error.patch"
+                                       "python-angr-check-exec-deps.patch"))
               (uri (git-reference
                      (url "https://github.com/angr/angr")
                      (commit (string-append "v" version))))

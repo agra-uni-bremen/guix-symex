@@ -1,4 +1,5 @@
 (define-module (symex packages angr)
+  #:use-module (symex packages)
   #:use-module (guix packages)
   #:use-module (guix download)
   #:use-module (guix gexp)
@@ -47,7 +48,7 @@
 (define-public python-capstone
   (package-with-patches
     engineering:python-capstone
-    '("patches/capstone-fix-python-constants.patch")))
+    (search-patches "capstone-fix-python-constants.patch")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -322,8 +323,8 @@ extracting type information.")
     (version "9.2.46")
     (source (origin
               (method git-fetch)
-              (patches '(;"patches/angr-addition-type-error.patch"
-                         "patches/angr-check-exec-deps.patch"))
+              (patches (search-patches "angr-addition-type-error.patch"
+                                       "angr-check-exec-deps.patch"))
               (uri (git-reference
                      (url "https://github.com/angr/angr")
                      (commit (string-append "v" version))))

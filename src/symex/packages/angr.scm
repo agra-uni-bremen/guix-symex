@@ -311,9 +311,9 @@ Intermediate Representation (IR) used by the angr binary analysis
 platform.")
     (license license:bsd-2)))
 
-(define-public python-itanium_demangle
+(define-public python-itanium-demangle
   (package
-    (name "python-itanium_demangle")
+    (name "python-itanium-demangle")
     (version "1.1")
     (source
      (origin
@@ -396,7 +396,7 @@ extracting type information.")
                              python-networkx
                              python-protobuf
                              python-psutil
-                             python-itanium_demangle
+                             python-itanium-demangle
                              python-pycparser
                              python-pyvex
                              python-progressbar2

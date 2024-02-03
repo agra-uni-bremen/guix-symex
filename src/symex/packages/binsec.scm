@@ -85,6 +85,7 @@ types and values.  The API is intended as an alternative to the
        (uri (git-reference
              (url "https://github.com/grain-lang/dypgen")
              (commit version)))
+       (file-name (git-file-name name version))
        (sha256
         (base32 "1jyxkvi75nchk5kmhqixmjy70z55gmlqa83pxn0hsv2qxvyqxavw"))))
     (build-system ocaml-build-system)

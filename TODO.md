@@ -26,5 +26,4 @@ TODOs for individual existing packages.
 
 ## BINSEC
 
-* Upgrade to version 0.8.1
 * Improve descriptions of added OCaml libraries

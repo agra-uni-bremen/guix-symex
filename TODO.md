@@ -22,7 +22,3 @@ TODOs for individual existing packages.
     * Touching this two packages will result in a lot of rebuilds
 * Improve descriptions of added Python libraries
 * Enable test suites of added libraries
-
-## BINSEC
-
-* Improve descriptions of added OCaml libraries

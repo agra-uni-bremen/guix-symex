@@ -48,7 +48,7 @@
     (description
      "This package provides an OCaml library for interacting
 with files in the TOML configuration format.  Specifically, it provides
-parser, a serializer and a printer for TOML.")
+parser, a serializer, and a printer for TOML.")
     (home-page "https://github.com/ocaml-toml/To.ml")
     (license license:expat)))
 
@@ -212,9 +212,11 @@ executable binaries and libraries, it is provided by Dune.")
                              ocaml-toml))
     (synopsis "Binary-level analysis platform")
     (description
-     "BINSEC is a toolset to help improve software security
-at the binary level.  It relies on research in binary code analysis, at
-the intersection of formal methods, program analysis, security and
+     "BINSEC is a binary analysis platform which implements analysis
+techniques such as symbolic execution.  The goal of BINSEC is to improve
+software security at the binary level through binary analysis.  BINSEC
+is a research tool which relies on prior work in binary code analysis
+at the intersection of formal methods, program analysis security and
 software engineering.")
     (home-page "https://binsec.github.io/")
     (license license:lgpl2.1)))

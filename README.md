@@ -30,6 +30,11 @@ One Guix is successfully installed and configured on your system, this channel c
 (cons* (channel
         (name 'symex)
         (url "https://github.com/nmeum/guix-symex")
+        (introduction
+          (make-channel-introduction
+            "6dc013a390d3abea0faa32246fc4399085d1ba3a"
+            (openpgp-fingerprint
+              "514E 833A 8861 1207 4F98  F68A E447 3B6A 9C05 755D"))))
        %default-channels)
 ```
 

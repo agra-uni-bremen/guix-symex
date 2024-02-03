@@ -1,6 +1,5 @@
 # General
 
-* Provide a channel authentication using OpenPGP signed commits
 * Add packages for additional symbolic execution engines
     * BAP: https://github.com/BinaryAnalysisPlatform/bap
     * radius: https://github.com/aemmitt-ns/radius

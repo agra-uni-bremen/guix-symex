@@ -16,10 +16,11 @@ Currently, the following symbolic execution engines are packaged:
 * [BINSEC]: Binary-level symbolic execution platform.
 * [SymEx-VP]: Symbolic execution of [RISC-V] binaries with support for [SystemC] hardware models.
 
-Packages for additional engines are more than welcome.
+More packages will be added in the future.
+Furthermore, patches adding additional additional symbolic execution engines are more than welcome.
 Nonetheless, in the long run, the goal is to integrate all packages into upstream Guix at some point (see below).
 
-## Usage
+## Setup
 
 Naturally, this channel requires Guix to be installed.
 If Guix is not yet installed no your system, refer to the [Guix installation instructions][guix install].
@@ -39,6 +40,36 @@ One Guix is successfully installed and configured on your system, this channel c
 ```
 
 For more information on channels, refer to the [Guix manual][guix channel].
+
+## Usage
+
+After configuring the channel successfully run `guix pull` to fetch the latest version of this new channel.
+If this command succeeds, you should be able to use package provided by this channel.
+As an example, run:
+
+    $ guix shell klee
+
+This command will drop you into an interactive shell where the KLEE symbolic execution engine (as provided by this channel) is available.
+Refer to [invoking `guix shell`][guix-shell] for more information on this interactive environment.
+
+For artifact evaluation purposes, you can generate a Docker or VM Image which has selected symbolic execution engines installed in binary form.
+As an example, the following command will generate a Docker image where both KLEE and BINSEC are installed:
+
+    $ guix pack -f docker \
+        --image-tag="symex-image" \
+        -S /bin=bin \
+        -S /usr/bin=bin \
+        klee binsec
+
+This will take a while and, if successful, print a file path along the lines of `/gnu/store/…-klee-docker-pack.tar.gz`.
+This file represents the generated Docker image.
+In order to use this image with Docker run the following commands:
+
+    $ docker load < /gnu/store/…-klee-docker-pack.tar.gz
+    $ docker run -it symex-image
+
+For more information in this regard refer to the documentation of [`guix pack`][guix-pack] and [`guix-system`][guix-system] in the Guix manual.
+Additionally, the paper [*Toward practical transparent verifiable and long-term reproducible research using Guix*][long-term reproduce] also provides a nice introduction regarding long-term reproducible research with Guix.
 
 ## Upstream Status
 
@@ -78,3 +109,6 @@ with this program. If not, see <https://www.gnu.org/licenses/>.
 [BINSEC]: https://github.com/binsec/binsec
 [guix install]: https://guix.gnu.org/en/manual/devel/en/html_node/Installation.html
 [guix repology]: https://repology.org/project/guix
+[guix-shell]: https://guix.gnu.org/en/manual/devel/en/html_node/Invoking-guix-shell.html
+[guix-pack]: https://guix.gnu.org/en/manual/devel/en/html_node/Invoking-guix-pack.html
+[guix-system]: https://guix.gnu.org/manual/en/html_node/Invoking-guix-system.html#index-virtual-machine

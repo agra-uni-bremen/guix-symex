@@ -1,6 +1,6 @@
 # guix-symex
 
-A [Guix] [channel][guix channel] containing several [symbolic execution] tools.
+A [Guix] [channel][guix channel] containing packages for several [symbolic execution] engines.
 
 ## Motivation
 
@@ -8,17 +8,16 @@ This is a channel for the functional package manager Guix which provides package
 The goal of this channel is to ease building long-term reproducible computational environments along the lines outlined in [prior work][long-term reproduce].
 Thereby, easing empirical comparisons with prior work in the symbolic execution domain.
 Additionally, the channel should also enable practitioners to install and setup various symbolic execution engines for software testing and software analysis purposes.
-Presently, it is often challenging to install these tools as they are tightly coupled with complex components such as [LLVM] and require specific (potentially older) version of these components which can be hard to obtain.
 
 Currently, the following symbolic execution engines are packaged:
 
-* [KLEE]: A symbolic execution engine for conventional desktop software which is based on the LLVM compiler infrastructure.
+* [KLEE]: A symbolic execution engine for which is based on the LLVM compiler infrastructure.
 * [angr]: A Python framework for symbolic execution of software in binary form.
 * [BinSec]: Binary-level symbolic execution platform.
-* [SymEx-VP]: Symbolic execution of 32-bit [RISC-V] binary code which support for [SystemC] hardware peripheral models.
+* [SymEx-VP]: Symbolic execution of [RISC-V] binaries with support for [SystemC] hardware models.
 
 Packages for additional engines are more than welcome.
-Nonetheless, the goal is to integrate all packages into upstream Guix at some point (see below).
+Nonetheless, in the long run, the goal is to integrate all packages into upstream Guix at some point (see below).
 
 ## Usage
 
@@ -27,10 +26,12 @@ If Guix is not yet installed no your system, refer to the [Guix installation ins
 Also note that many [Linux distributions][guix repology] (such as Alpine, Debian, or Ubuntu) provide packages for Guix which may ease installation.
 One Guix is successfully installed and configured on your system, this channel can be enabled by adding it to `~/.config/guix/channels.scm`:
 
-    (cons* (channel
-            (name 'symex)
-            (url "https://github.com/nmeum/guix-symex")
-           %default-channels)
+```scheme
+(cons* (channel
+        (name 'symex)
+        (url "https://github.com/nmeum/guix-symex")
+       %default-channels)
+```
 
 For more information on channels, refer to the [Guix manual][guix channel].
 

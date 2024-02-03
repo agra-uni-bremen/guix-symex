@@ -9,9 +9,9 @@
   #:use-module (gnu packages multiprecision)
   #:use-module (gnu packages ocaml))
 
-(define-public ocaml-ISO8601
+(define-public ocaml-iso8601
   (package
-    (name "ocaml-ISO8601")
+    (name "ocaml-iso8601")
     (version "0.2.6")
     (source
      (origin
@@ -43,7 +43,7 @@
        (sha256
         (base32 "0z2873mj3i6h9cg8zlkipcjab8jympa4c4avhk4l04755qzphkds"))))
     (build-system dune-build-system)
-    (propagated-inputs (list ocaml-base ocaml-mdx ocaml-menhir ocaml-ISO8601))
+    (propagated-inputs (list ocaml-base ocaml-mdx ocaml-menhir ocaml-iso8601))
     (synopsis "TOML library for OCaml")
     (description
      "This package provides an OCaml library for interacting

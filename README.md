@@ -13,7 +13,7 @@ Currently, the following symbolic execution engines are packaged:
 
 * [KLEE]: A symbolic execution engine for which is based on the LLVM compiler infrastructure.
 * [angr]: A Python framework for symbolic execution of software in binary form.
-* [BinSec]: Binary-level symbolic execution platform.
+* [BINSEC]: Binary-level symbolic execution platform.
 * [SymEx-VP]: Symbolic execution of [RISC-V] binaries with support for [SystemC] hardware models.
 
 Packages for additional engines are more than welcome.
@@ -45,6 +45,7 @@ For more information on channels, refer to the [Guix manual][guix channel].
 The following packages are currently in the process of being upstreamed:
 
 * KLEE: https://issues.guix.gnu.org/68296
+* BINSEC: https://issues.guix.gnu.org/68908
 * …
 
 More packages will be proposed for upstream integration soon.
@@ -74,6 +75,6 @@ with this program. If not, see <https://www.gnu.org/licenses/>.
 [RISC-V]: https://riscv.org/
 [SystemC]: https://systemc.org
 [angr]: https://angr.io
-[BinSec]: https://github.com/binsec/binsec
+[BINSEC]: https://github.com/binsec/binsec
 [guix install]: https://guix.gnu.org/en/manual/devel/en/html_node/Installation.html
 [guix repology]: https://repology.org/project/guix

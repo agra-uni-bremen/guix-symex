@@ -1,5 +1,4 @@
 (define-module (symex packages angr)
-  #:use-module (symex packages)
   #:use-module (guix packages)
   #:use-module (guix download)
   #:use-module (guix gexp)
@@ -8,6 +7,7 @@
   #:use-module (guix git-download)
   #:use-module (guix build-system python)
   #:use-module (guix build-system pyproject)
+  #:use-module (gnu packages)
   #:use-module (gnu packages databases)
   #:use-module (gnu packages check)
   #:use-module (gnu packages cmake)
@@ -50,8 +50,7 @@
 ;; See: https://github.com/capstone-engine/capstone/pull/2240
 (define-public python-capstone
   (package-with-patches engineering:python-capstone
-                        (search-patches
-                         "python-capstone-fix-python-constants.patch")))
+                        (search-patches "patches/python-capstone-fix-python-constants.patch")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -344,8 +343,8 @@ extracting type information.")
     (source
      (origin
        (method git-fetch)
-       (patches (search-patches "python-angr-addition-type-error.patch"
-                                "python-angr-check-exec-deps.patch"))
+       (patches (search-patches "patches/python-angr-addition-type-error.patch"
+                                "patches/python-angr-check-exec-deps.patch"))
        (uri (git-reference
              (url "https://github.com/angr/angr")
              (commit (string-append "v" version))))

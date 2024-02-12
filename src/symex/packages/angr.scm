@@ -300,8 +300,12 @@ information.  Useful for cross-architecture tools (such as pyvex).")
         (base32 "073fcssbjis1ckwv2w0dcz2dfl6715bj4d4qdhspajj911mvng2f"))))
     (build-system pyproject-build-system)
     (arguments
-     (list
-      #:tests? #f))
+     `(#:phases (modify-phases %standard-phases
+                  (replace 'check
+                    (lambda* (#:key tests? #:allow-other-keys)
+                      (when tests?
+                        (with-directory-excursion "tests"
+                          (invoke "python" "-m" "unittest"))))))))
     (home-page "https://github.com/angr/ailment")
     (synopsis "The angr intermediate language")
     (description

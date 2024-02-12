@@ -132,6 +132,7 @@ interactions with lists of Python objects.")
        (uri (git-reference
              (url "https://github.com/pysmt/pysmt")
              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
        (sha256
         (base32 "0hrxv23y5ip4ijfx5pvbwc2fq4zg9jz42wc9zqgqm0g0mjc9ckvh"))))
     (build-system pyproject-build-system)
@@ -146,7 +147,7 @@ interactions with lists of Python objects.")
     (propagated-inputs (list z3))
     (home-page "https://github.com/pysmt/pysmt")
     (synopsis
-     "A solver-agnostic library for SMT formula manipulation and solving")
+     "Solver-agnostic library for SMT formula manipulation and solving")
     (description
      "This Python module provides a solver-agnostic abstraction for
 working with Satisfiability Modulo Theory (SMT) formulas  For example,

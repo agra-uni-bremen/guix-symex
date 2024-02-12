@@ -262,7 +262,7 @@ it was loader by the operating system's loader.")
     (description
      "Keystone is a lightweight multi-platform, multi-architecture
 assembler framework.  It supports a wide-range of different architectures
-and overs an intuitive architecture-neutral API for interacting with
+and offers an intuitive architecture-neutral API for interacting with
 assembly for these architectures.")
     (license license:gpl2)))
 
@@ -411,7 +411,7 @@ extracting type information.")
                       ;; purpose.  The binaries are not executed and not part of the
                       ;; angr distribution, they are only used to test angr's binary
                       ;; analysis capabilities.  In the context of the GNU FSDG, these
-                      ;; fails should be considered non-functional data.
+                      ;; files should be considered non-functional data.
                       ,(origin
                          (method git-fetch)
                          (uri (git-reference (url

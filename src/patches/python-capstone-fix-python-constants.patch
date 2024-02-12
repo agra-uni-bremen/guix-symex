@@ -1,11 +1,6 @@
-From f180e176de3efb060db62820ff981d0291ea8525 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?S=C3=B6ren=20Tempel?= <soeren+github@soeren-tempel.net>
-Date: Thu, 18 Jan 2024 01:43:31 +0000
-Subject: [PATCH] Revert "Update constants from ARM auto-sync patch" (#2240)
+Backport upstream patch fixing various constants in the Python bindings.
 
----
- bindings/python/capstone/__init__.py | 42 +++++-----------------------
- 1 file changed, 7 insertions(+), 35 deletions(-)
+Taken from: https://github.com/capstone-engine/capstone/commit/f180e176de3efb060db62820ff981d0291ea8525
 
 diff --git a/bindings/python/capstone/__init__.py b/bindings/python/capstone/__init__.py
 index bda2fdb6..52353c28 100755

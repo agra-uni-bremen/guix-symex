@@ -117,24 +117,6 @@ common library subroutines in disassembled binaries.")
 interactions with lists of Python objects.")
     (license license:bsd-3)))
 
-(define-public python-cppheaderparser
-  (package
-    (name "python-cppheaderparser")
-    (version "2.7.4")
-    (source
-     (origin
-       (method url-fetch)
-       (uri (pypi-uri "CppHeaderParser" version))
-       (sha256
-        (base32 "0hncwd9y5ayk8wa6bqhp551mcamcvh84h89ba3labc4mdm0k0arq"))))
-    (build-system pyproject-build-system)
-    (propagated-inputs (list python-ply))
-    (home-page "http://senexcanis.com/open-source/cppheaderparser/")
-    (synopsis "Parser for C++ header files")
-    (description
-     "Parse C++ header files and generate a data structure representing the class.")
-    (license license:bsd-3)))
-
 (define-public python-pysmt
   (package
     (name "python-pysmt")

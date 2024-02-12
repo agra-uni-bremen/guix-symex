@@ -286,8 +286,12 @@ assembly for these architectures.")
     (build-system pyproject-build-system)
     (propagated-inputs (list python-capstone python-keystone-engine))
     (arguments
-     (list
-      #:tests? #f))
+     `(#:phases (modify-phases %standard-phases
+                  (replace 'check
+                    (lambda* (#:key tests? #:allow-other-keys)
+                      (when tests?
+                        (with-directory-excursion "tests"
+                          (invoke "python" "-m" "unittest"))))))))
     (home-page "https://github.com/angr/archinfo")
     (synopsis "Extract architecture-specific information from binaries")
     (description

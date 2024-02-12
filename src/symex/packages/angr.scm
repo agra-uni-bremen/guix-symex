@@ -196,8 +196,7 @@ SMT solvers and is built on top of the Z3 solver.")
     (source
      (origin
        (method url-fetch)
-       (patches (search-patches "patches/python-pyvex-no-angr-in-tsmr-tests.patch"
-                                "patches/python-pyvex-remove-full-binary-test.patch"))
+       (patches (search-patches "patches/python-pyvex-remove-angr-dependency.patch"))
        (uri (pypi-uri "pyvex" version))
        (sha256
         (base32 "1v64rn7gxy6fg065bgsy38z6r494k5ri5r6sn4g08hjj32ihx1ka"))))

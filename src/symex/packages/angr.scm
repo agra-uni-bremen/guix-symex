@@ -277,7 +277,7 @@ it was loader by the operating system's loader.")
        (uri (pypi-uri "keystone-engine" version))
        (sha256
         (base32 "1xahdr6bh3dw5swrc2r8kqa8ljhqlb7k2kxv5mrw5rhcmcnzcyig"))))
-    (inputs (list cmake))
+    (native-inputs (list cmake))
     (build-system pyproject-build-system)
     (home-page "https://www.keystone-engine.org")
     (synopsis

@@ -325,8 +325,12 @@ platform.")
         (base32 "1q47aqm5z3db6pasdzw05d6236vnb8hnapfy88fcmn9dr5ym98r3"))))
     (build-system pyproject-build-system)
     (arguments
-     (list
-      #:tests? #f))
+     `(#:phases (modify-phases %standard-phases
+                  (replace 'check
+                    (lambda* (#:key tests? #:allow-other-keys)
+                      (when tests?
+                        (with-directory-excursion "tests"
+                          (invoke "python" "-m" "unittest"))))))))
     (home-page "https://github.com/whitequark/python-itanium_demangler")
     (synopsis "Pure Python Itanium C++ ABI demangler")
     (description

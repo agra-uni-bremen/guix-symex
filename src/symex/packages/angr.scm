@@ -34,14 +34,13 @@
        (uri (pypi-uri name version))
        (sha256
         (base32 "0mlfs8qfi0clyncfkbxp6in0cpl747510i6bqymwid43xcirbikz"))))
-    ;; NOTE: Unicorn 2 using pyproject to build
     (build-system pyproject-build-system)
     (native-inputs (list cmake pkg-config))
-    (home-page "http://www.unicorn-engine.org")
-    (synopsis "Unicorn CPU emulator framework")
+    (home-page "https://www.unicorn-engine.org")
+    (synopsis "Generic CPU emulator framework")
     (description
-     "Uniforn is a lightweight, multi-platform, multi-architecture CPU emulator
-                 framework based on QEMU.")
+     "Uniforn is a lightweight, multi-platform, multi-architecture CPU
+emulator framework based on QEMU.")
     (license license:gpl2+)))
 
 ;; Custom python-capstone verison with a backport for a capstone regression.

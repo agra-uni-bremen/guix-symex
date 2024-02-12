@@ -164,21 +164,28 @@ it allows manipulation and solving such formulas.")
     (version "9.2.46")
     (source
      (origin
-       (method url-fetch)
-       (uri (pypi-uri "claripy" version))
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://github.com/angr/claripy")
+             (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
        (sha256
-        (base32 "137pfd765jdg4xsn2fsi3k3mj2fg7qypm9k27bb5qpz8fbqddnjv"))
+        (base32 "0nmawpi1596d9plafrp2db36cjsidy2fagkzkja51jwlx2m1ngai"))
        (modules '((guix build utils)))
        (snippet '(begin
                    (substitute* "setup.cfg"
-                     ;; See https://github.com/angr/claripy/commit/d1fe2df65afa137454d0da83a95be925f71ff262
-                     ;; XXX: It seems the native z3 library is called z3 not z3-solver.
+                     ;; Relax the z3 version constraint.
+                     ;; See https://github.com/angr/claripy/commit/d1fe2df
                      (("z3-solver==4.10.2.0")
                       ""))))))
     (build-system pyproject-build-system)
     (arguments
-     (list
-      #:tests? #f))
+     `(#:phases (modify-phases %standard-phases
+                  (replace 'check
+                    (lambda* (#:key tests? #:allow-other-keys)
+                      (when tests?
+                        (with-directory-excursion "tests"
+                          (invoke "python" "-m" "unittest"))))))))
     (propagated-inputs (list python-cachetools python-decorator python-pysmt
                              z3))
     (home-page "https://github.com/angr/claripy")

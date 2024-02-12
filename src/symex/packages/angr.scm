@@ -291,8 +291,8 @@ assembly for these architectures.")
     (home-page "https://github.com/angr/archinfo")
     (synopsis "Extract architecture-specific information from binaries")
     (description
-     "Collection of classes that contain architecture-specific
-information.  Useful for cross-architecture tools (such as pyvex).")
+     "Collection of classes that contain architecture-specific information
+information.  Useful for cross-architecture tools (such as @code{python-pyvex}).")
     (license license:bsd-2)))
 
 (define-public python-ailment

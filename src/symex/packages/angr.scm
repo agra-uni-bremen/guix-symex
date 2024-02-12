@@ -141,14 +141,24 @@ interactions with lists of Python objects.")
     (version "0.9.5")
     (source
      (origin
-       (method url-fetch)
-       (uri (pypi-uri "PySMT" version))
+       (method git-fetch)
+       (patches (search-patches "patches/python-pysmt-fix-pow-return-type.patch"
+                 "patches/python-pysmt-fix-smtlib-serialization-test.patch"))
+       (uri (git-reference
+             (url "https://github.com/pysmt/pysmt")
+             (commit (string-append "v" version))))
        (sha256
-        (base32 "0izcl2wma7sid4a8a2qc9rzi8fnffsc8p97cx6njb2sc9rnnly8c"))))
+        (base32 "0hrxv23y5ip4ijfx5pvbwc2fq4zg9jz42wc9zqgqm0g0mjc9ckvh"))))
     (build-system pyproject-build-system)
     (arguments
-     (list
-      #:tests? #f))
+     `(#:phases (modify-phases %standard-phases
+                  (replace 'check
+                    (lambda* (#:key tests? #:allow-other-keys)
+                      (when tests?
+                        (setenv "PYSMT_SOLVER" "z3")
+                        (invoke "python" "-m" "pytest" "pysmt" "-v")))))))
+    (native-inputs (list python-pytest))
+    (propagated-inputs (list z3))
     (home-page "https://github.com/pysmt/pysmt")
     (synopsis
      "A solver-agnostic library for SMT formula manipulation and solving")

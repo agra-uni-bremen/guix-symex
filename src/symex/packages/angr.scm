@@ -196,14 +196,21 @@ SMT solvers and is built on top of the Z3 solver.")
     (source
      (origin
        (method url-fetch)
+       (patches (search-patches "patches/python-pyvex-no-angr-in-tsmr-tests.patch"
+                                "patches/python-pyvex-remove-full-binary-test.patch"))
        (uri (pypi-uri "pyvex" version))
        (sha256
         (base32 "1v64rn7gxy6fg065bgsy38z6r494k5ri5r6sn4g08hjj32ihx1ka"))))
     (build-system pyproject-build-system)
     (arguments
      (list
-      #:tests? #f
       #:phases #~(modify-phases %standard-phases
+                   (replace 'check
+                     (lambda* (#:key tests? #:allow-other-keys)
+                       (when tests?
+                         (with-directory-excursion "tests"
+                           (invoke "python" "-m" "unittest")))))
+
                    (add-before 'build 'set-cc-native
                      (lambda _
                        (setenv "CC" "gcc")

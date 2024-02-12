@@ -319,9 +319,9 @@ information.  Useful for cross-architecture tools (such as @code{python-pyvex}).
     (home-page "https://github.com/angr/ailment")
     (synopsis "The angr intermediate language")
     (description
-     "This Pythom module implements an Intermediate Language (IL) or
-Intermediate Representation (IR) used by the angr binary analysis
-platform.")
+     "This Python module implements an @acronym{IL, Intermediate
+Language}, also known as @acronym{IR, Intermediate Representation),
+used by the angr binary analysis platform.")
     (license license:bsd-2)))
 
 (define-public python-itanium-demangle

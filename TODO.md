@@ -20,5 +20,7 @@ TODOs for individual existing packages.
     * Requires new version of Guix's python-rich package
     * The python-rich upgrade requires a python-pygmentize upgrade
     * Touching this two packages will result in a lot of rebuilds
-* Improve descriptions of added Python libraries
-* Enable test suites of added libraries
+* Enable tests for py-cle (requires angr/binaries)
+* Double check packages with no custom test rule
+    * The default test target doesn't error if no tests are run
+* Debug remaining failing test for python-angr

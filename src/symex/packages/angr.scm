@@ -231,7 +231,7 @@ SMT solvers and is built on top of the Z3 solver.")
 
                    (add-before 'build 'set-cc-native
                      (lambda _
-                       (setenv "CC" "gcc")
+                       (setenv "CC" #$(cc-for-target))
                        (setenv "CC_NATIVE" "gcc"))))))
     (propagated-inputs (list python-archinfo python-bitstring python-cffi))
     (home-page "https://github.com/angr/pyvex")

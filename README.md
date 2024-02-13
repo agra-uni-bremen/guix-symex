@@ -77,6 +77,7 @@ The following packages are currently in the process of being upstreamed:
 
 * KLEE: https://issues.guix.gnu.org/68296
 * BINSEC: https://issues.guix.gnu.org/68908
+* angr: https://issues.guix.gnu.org/69074
 * …
 
 More packages will be proposed for upstream integration soon.

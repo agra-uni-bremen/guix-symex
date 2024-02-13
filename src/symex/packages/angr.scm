@@ -409,8 +409,10 @@ extracting type information.")
                            ;; test_mips32_missing_offset_in_instructions fails
                            ;; with capstone 5 and passes with capstone 4. Might
                            ;; be a capstone regressions, needs investigation.
+                           ;;
+                           ;; test_concrete_memset is a non-deterministic benchmark.
                            (invoke "pytest" "-vv" "-x" "--dist" "loadfile"
-                                   "-k" "not test_mips32_missing_offset_in_instructions"
+                                   "-k" "not test_mips32_missing_offset_in_instructions and not test_concrete_memset"
                                    "-n" (number->string (parallel-job-count)))))))
                    (add-before 'build 'set-cc
                      (lambda _

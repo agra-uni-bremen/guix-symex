@@ -77,8 +77,6 @@ emulator framework based on QEMU.")
                   (replace 'check
                     (lambda* (#:key tests? #:allow-other-keys)
                       (when tests?
-                        ;; Disabled tests require network access.
-                        ;; Fail with "Network is unreachable".
                         (with-directory-excursion "tests"
                           (invoke "python" "-m" "unittest"))))))))
     (propagated-inputs (list python-hatchling python-plumbum))

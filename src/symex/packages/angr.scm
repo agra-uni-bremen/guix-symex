@@ -58,14 +58,29 @@ emulator framework based on QEMU.")
     (version "5.3.1")
     (source
      (origin
-       (method url-fetch)
-       (uri (pypi-uri "rpyc" version))
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://github.com/tomerfiliba-org/rpyc")
+             (commit version)))
        (sha256
-        (base32 "0lmzrxc6f0sg6k0yvi6f2z44dkhiankdadv44sp1ibwzhxs328zj"))))
+        (base32 "15mnp9qkyw3mmxmr5y4kf3xkvxyp00n892vqaqwznr7al35apgnr"))
+       (snippet '(begin
+                   ;; Disable deploy tests, these rely on OpenSSH and require
+                   ;; configuring the SSH client manually to accept the host key.
+                   (delete-file "tests/test_deploy.py")
+                   ;; Disable tests requiring network access.  These tests
+                   ;; presently fail with the error "Network is unreachable".
+                   (delete-file "tests/test_registry.py")))))
     (build-system pyproject-build-system)
     (arguments
-     (list
-      #:tests? #f))
+     `(#:phases (modify-phases %standard-phases
+                  (replace 'check
+                    (lambda* (#:key tests? #:allow-other-keys)
+                      (when tests?
+                        ;; Disabled tests require network access.
+                        ;; Fail with "Network is unreachable".
+                        (with-directory-excursion "tests"
+                          (invoke "python" "-m" "unittest"))))))))
     (propagated-inputs (list python-hatchling python-plumbum))
     (home-page "https://github.com/tomerfiliba-org/rpyc")
     (synopsis

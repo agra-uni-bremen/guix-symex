@@ -30,7 +30,7 @@ One Guix is successfully installed and configured on your system, this channel c
 ```scheme
 (cons* (channel
         (name 'symex)
-        (url "https://github.com/nmeum/guix-symex")
+        (url "https://github.com/agra-uni-bremen/guix-symex")
         (introduction
           (make-channel-introduction
             "6dc013a390d3abea0faa32246fc4399085d1ba3a"

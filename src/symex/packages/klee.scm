@@ -93,6 +93,9 @@ with the @code{klee} package.")
     (supported-systems '("x86_64-linux"))
     (arguments
      `(#:test-target "systemtests"
+       ;; Default (RelWithDebInfo) build type causes an internal error
+       ;; in clang while compiling KLEE, hence use a different build type.
+       #:build-type "Release"
        #:strip-directories '("bin")
        #:configure-flags ,#~(list "-DENABLE_KLEE_ASSERTS=OFF"
                                   "-DENABLE_TCMALLOC=ON"

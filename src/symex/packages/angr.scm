@@ -171,6 +171,7 @@ it allows manipulation and solving such formulas.")
 (define-public python-claripy
   (package
     (name "python-claripy")
+    ;; Must be the same version as python-angr.
     (version "9.2.46")
     (source
      (origin
@@ -209,6 +210,7 @@ SMT solvers and is built on top of the Z3 solver.")
 (define-public python-pyvex
   (package
     (name "python-pyvex")
+    ;; Must be the same version as python-angr.
     (version "9.2.46")
     (source
      (origin
@@ -244,6 +246,7 @@ to enable all kinds of binary analysis tasks.")
 (define-public python-cle
   (package
     (name "python-cle")
+    ;; Must be the same version as python-angr.
     (version "9.2.46")
     (source
      (origin
@@ -291,6 +294,7 @@ assembly for these architectures.")
 (define-public python-archinfo
   (package
     (name "python-archinfo")
+    ;; Must be the same version as python-angr.
     (version "9.2.46")
     (source
      (origin
@@ -317,6 +321,7 @@ information.  Useful for cross-architecture tools (such as @code{python-pyvex}).
 (define-public python-ailment
   (package
     (name "python-ailment")
+    ;; Must be the same version as python-angr.
     (version "9.2.46")
     (source
      (origin

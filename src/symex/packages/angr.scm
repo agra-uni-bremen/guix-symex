@@ -328,6 +328,7 @@ information.  Useful for cross-architecture tools (such as @code{python-pyvex}).
     (arguments
      `(#:phases (modify-phases %standard-phases
                   (replace 'check
+                    ;; Many tests are skipped due to cyclic dependencies.
                     (lambda* (#:key tests? #:allow-other-keys)
                       (when tests?
                         (with-directory-excursion "tests"

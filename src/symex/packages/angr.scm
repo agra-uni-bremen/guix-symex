@@ -106,8 +106,8 @@ were local.")
     (home-page "https://github.com/thebabush/nampa")
     (synopsis "Python implementation of IDA Pro's FLIRT technology")
     (description
-     "This Python module implements the Fast Library Identification
-and Recognition Technology (FLIRT).  This technology is useful for identifying
+     "This Python module implements the @acronym{FLIRT, Fast Library Identification
+and Recognition Technology}.  This technology is useful for identifying
 common library subroutines in disassembled binaries.")
     (license license:lgpl3)))
 
@@ -164,7 +164,7 @@ interactions with lists of Python objects.")
      "Solver-agnostic library for SMT formula manipulation and solving")
     (description
      "This Python module provides a solver-agnostic abstraction for
-working with Satisfiability Modulo Theory (SMT) formulas  For example,
+working with @acronym{SMT, Satisfiability Modulo Theory} formulas.  For example,
 it allows manipulation and solving such formulas.")
     (license license:asl2.0)))
 

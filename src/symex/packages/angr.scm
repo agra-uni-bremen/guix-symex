@@ -152,11 +152,9 @@ interactions with lists of Python objects.")
     (build-system pyproject-build-system)
     (arguments
      `(#:phases (modify-phases %standard-phases
-                  (replace 'check
-                    (lambda* (#:key tests? #:allow-other-keys)
-                      (when tests?
-                        (setenv "PYSMT_SOLVER" "z3")
-                        (invoke "python" "-m" "pytest" "pysmt" "-v")))))))
+                  (add-before 'check 'set-pysmt-solver
+                    (lambda _
+                      (setenv "PYSMT_SOLVER" "z3"))))))
     (native-inputs (list python-pytest))
     (propagated-inputs (list z3))
     (home-page "https://github.com/pysmt/pysmt")

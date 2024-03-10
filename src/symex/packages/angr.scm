@@ -398,14 +398,14 @@ extracting type information.")
                        (let ((coreutils (assoc-ref inputs "coreutils")))
                          (substitute* "tests/test_vault.py"
                            (("/bin/false")
-                            (string-append coreutils "/bin/false")))
+                            (which "false")))
                          (substitute* "tests/common.py"
                            (("\\[\"cc\"\\]")
                             "[\"gcc\"]")))))
                    (replace 'check
                      (lambda* (#:key inputs tests? #:allow-other-keys)
                        (when tests?
-                         (copy-recursively (assoc-ref inputs "binaries")
+                         (copy-recursively #$(this-package-native-input "binaries")
                                            "../binaries")
                          (with-directory-excursion "tests"
                            ;; test_mips32_missing_offset_in_instructions fails

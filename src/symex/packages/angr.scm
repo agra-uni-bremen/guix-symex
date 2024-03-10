@@ -132,7 +132,7 @@ common library subroutines in disassembled binaries.")
     (synopsis "Multiplexes interactions with lists of Python objects")
     (description "This module provides utilities for multiplexing
 interactions with lists of Python objects.")
-    (license license:bsd-3)))
+    (license license:bsd-2)))
 
 (define-public python-pysmt
   (package

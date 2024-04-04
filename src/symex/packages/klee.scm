@@ -72,7 +72,7 @@
        "Modified version of uClibc for symbolic execution of
 Unix userland software.  This library can only be used in conjunction
 with the @code{klee} package.")
-      (home-page "https://klee.github.io/")
+      (home-page "https://klee-se.org/")
       (license license:lgpl2.1))))
 
 (define-public klee
@@ -124,5 +124,5 @@ with the @code{klee} package.")
 LLVM.  Symbolic execution is an automated software testing technique,
 KLEE leverage this technique to automatically generate test cases for
 software compiled to LLVM IR.")
-    (home-page "https://klee.github.io/")
+    (home-page "https://klee-se.org/")
     (license (list license:expat license:bsd-4))))

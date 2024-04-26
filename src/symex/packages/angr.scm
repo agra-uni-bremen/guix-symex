@@ -8,6 +8,7 @@
   #:use-module (guix build-system python)
   #:use-module (guix build-system pyproject)
   #:use-module (gnu packages)
+  #:use-module (gnu packages graphviz)
   #:use-module (gnu packages databases)
   #:use-module (gnu packages check)
   #:use-module (gnu packages cmake)
@@ -51,6 +52,72 @@ emulator framework based on QEMU.")
                         (search-patches "patches/python-capstone-fix-python-constants.patch")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define-public python-pyformlang
+  (package
+    (name "python-pyformlang")
+    (version "1.0.10")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (pypi-uri "pyformlang" version))
+       (sha256
+        (base32 "0szgy4pqfixmswjs37qgma4qa3bsadpp3l1xflrpfi10aa8hh2sp"))))
+    (build-system pyproject-build-system)
+    (propagated-inputs (list python-networkx python-numpy python-pydot))
+    (home-page "https://github.com/Aunsiels/pyformlang")
+    (synopsis "A python framework for formal grammars")
+    (description
+     "This package provides a python framework for formal grammars")
+    (license license:expat)))
+
+(define-public python-unique-log-filter
+  (package
+    (name "python-unique-log-filter")
+    (version "0.1.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://github.com/twizmwazin/unique_log_filter")
+             (commit (string-append "v" version))))
+       (sha256
+         (base32 "036mh6nqskck2fa1q2inasqxb9wcz2p09qcpldnnffzcy1a6kzba"))))
+    (build-system pyproject-build-system)
+    (arguments
+     `(#:phases (modify-phases %standard-phases
+                  (replace 'check
+                    (lambda* (#:key tests? #:allow-other-keys)
+                      (when tests?
+                        (invoke "python" "test_unique_log_filter.py")))))))
+    (native-inputs (list python-flit-core))
+    (home-page "https://github.com/twizmwazin/unique_log_filter")
+    (synopsis "A log filter that removes duplicate log messages")
+    (description
+     "This package provides a log filter that removes duplicate log messages.")
+    (license license:bsd-2)))
+
+(define-public python-backports-strenum
+  (package
+    (name "python-backports-strenum")
+    (version "1.3.1")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (pypi-uri "backports_strenum" version))
+       (sha256
+        (base32 "0514yj1391k6pbs2cch6i57hidwb3236wngh2ivlk6186h3j9ibp"))))
+    (native-inputs (list python-poetry-core))
+    (build-system pyproject-build-system)
+    ;; TODO: Running tests requires a new version of poetry in Guix.
+    (arguments
+     (list
+      #:tests? #f))
+    (home-page "https://github.com/clbarnes/backports.strenum")
+    (synopsis "Backport of additions to the 'strenum' module")
+    (description
+     "Base class for creating enumerated constants that are also subclasses of str.")
+    (license license:expat)))
 
 (define-public python-rpyc
   (package
@@ -170,7 +237,7 @@ it allows manipulation and solving such formulas.")
   (package
     (name "python-claripy")
     ;; Must be the same version as python-angr.
-    (version "9.2.46")
+    (version "9.2.100")
     (source
      (origin
        (method git-fetch)
@@ -179,7 +246,7 @@ it allows manipulation and solving such formulas.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0nmawpi1596d9plafrp2db36cjsidy2fagkzkja51jwlx2m1ngai"))
+        (base32 "1z1r21d4kdf70jsg2g1cckvly8cfnlgsbvsiw8b1px3wamidfhwf"))
        (modules '((guix build utils)))
        (snippet '(begin
                    (substitute* "setup.cfg"
@@ -209,14 +276,13 @@ SMT solvers and is built on top of the Z3 solver.")
   (package
     (name "python-pyvex")
     ;; Must be the same version as python-angr.
-    (version "9.2.46")
+    (version "9.2.100")
     (source
      (origin
        (method url-fetch)
-       (patches (search-patches "patches/python-pyvex-remove-angr-dependency.patch"))
        (uri (pypi-uri "pyvex" version))
        (sha256
-        (base32 "1v64rn7gxy6fg065bgsy38z6r494k5ri5r6sn4g08hjj32ihx1ka"))))
+        (base32 "0xm3q36f5kpzxhgf22khhifzakjzcwsh263cw16kc9mimcpyja74"))))
     (build-system pyproject-build-system)
     (arguments
      (list
@@ -245,13 +311,13 @@ to enable all kinds of binary analysis tasks.")
   (package
     (name "python-cle")
     ;; Must be the same version as python-angr.
-    (version "9.2.46")
+    (version "9.2.100")
     (source
      (origin
        (method url-fetch)
        (uri (pypi-uri "cle" version))
        (sha256
-        (base32 "0mswv9gd2p2ws7zfsshqv5ybbj27wkdwakdcknq4vsrx9ry9k4yc"))))
+        (base32 "1p3fq04nfpzfclwcwiswv8bmr05qrp8zyr4azbnkc6gvp7bi3sw6"))))
     (build-system pyproject-build-system)
     (arguments
      (list
@@ -293,17 +359,22 @@ assembly for these architectures.")
   (package
     (name "python-archinfo")
     ;; Must be the same version as python-angr.
-    (version "9.2.46")
+    (version "9.2.100")
     (source
      (origin
        (method url-fetch)
        (uri (pypi-uri "archinfo" version))
        (sha256
-        (base32 "037xfq3wcf8ngayxz9623l4646m780v2102mfbygpzbkkjha1966"))))
+        (base32 "0zpqvkcvmr59g8fwn5sq0mrjw3h6k7hf87npc5pdz7jpi7hv2xyx"))))
     (build-system pyproject-build-system)
-    (propagated-inputs (list python-capstone python-keystone-engine))
+    (propagated-inputs (list python-backports-strenum python-capstone python-keystone-engine))
     (arguments
      `(#:phases (modify-phases %standard-phases
+                  (add-after 'unpack 'patch
+                    (lambda _
+                      (substitute* "setup.cfg"
+                        (("backports.strenum")
+                         "backports_strenum"))))
                   (replace 'check
                     (lambda* (#:key tests? #:allow-other-keys)
                       (when tests?
@@ -320,13 +391,13 @@ information.  Useful for cross-architecture tools (such as @code{python-pyvex}).
   (package
     (name "python-ailment")
     ;; Must be the same version as python-angr.
-    (version "9.2.46")
+    (version "9.2.100")
     (source
      (origin
        (method url-fetch)
        (uri (pypi-uri "ailment" version))
        (sha256
-        (base32 "073fcssbjis1ckwv2w0dcz2dfl6715bj4d4qdhspajj911mvng2f"))))
+        (base32 "15md0laxqywhi3vsqn96qkg95nw15d7xh2ch1pbnza15ybxxzx5b"))))
     (build-system pyproject-build-system)
     (arguments
      `(#:phases (modify-phases %standard-phases
@@ -377,28 +448,34 @@ extracting type information.")
 (define-public python-angr
   (package
     (name "python-angr")
-    (version "9.2.46")
+    (version "9.2.100")
     (source
      (origin
        (method git-fetch)
-       (patches (search-patches "patches/python-angr-addition-type-error.patch"
-                                "patches/python-angr-check-exec-deps.patch"))
+       (patches (search-patches "patches/python-angr-check-exec-deps.patch"))
        (uri (git-reference
              (url "https://github.com/angr/angr")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "18y9wyf7va7gvp9zd6lhw82j9a2x2ajsvbawh96xnxzml0jwlwjm"))))
+        (base32 "1j8bqy4wkqaln75pyysh4v583sp3ridnawda5p88j9baplpb2g0x"))))
     (build-system pyproject-build-system)
     (arguments
      (list
       #:phases #~(modify-phases %standard-phases
-                   (add-after 'unpack 'patch-tests
+                   (add-after 'unpack 'patch
                      (lambda* (#:key inputs #:allow-other-keys)
                        (let ((coreutils (assoc-ref inputs "coreutils")))
-                         (substitute* "tests/test_vault.py"
-                           (("/bin/false")
-                            (which "false")))
+                         ;; Relax constraint on python-capstone, there is one failing test with 5.0.1.
+                         ;;
+                         ;; See also: https://github.com/angr/angr/pull/4087
+                         (substitute* "setup.cfg"
+                          (("capstone==5.0.0.post1")
+                           "capstone"))
+                         ;; Relax constraint on python-rich (seems to be too strict anyhow).
+                         (substitute* "setup.cfg"
+                           (("rich>=13.1.0")
+                            "rich"))
                          (substitute* "tests/common.py"
                            (("\\[\"cc\"\\]")
                             "[\"gcc\"]")))))
@@ -438,11 +515,13 @@ extracting type information.")
                              python-itanium-demangle
                              python-pycparser
                              python-pyvex
-                             python-progressbar2
+                             python-pyformlang
+                             python-rich
                              python-rpyc
                              python-sortedcontainers
                              python-sqlalchemy
                              python-sympy
+                             python-unique-log-filter
                              unicorn))
     (native-inputs `(("python-pytest" ,python-pytest)
                      ("python-pytest-xdist" ,python-pytest-xdist)
@@ -460,7 +539,7 @@ extracting type information.")
                                                                     version))))
                          (file-name (git-file-name "angr-binaries" version))
                          (sha256 (base32
-                                  "1f286b2239zavxzwg1184hj1zs380cr9qr549mvy3vywvm8bsmgr"))))))
+                                  "0ng85zs13dvnvn7ny6jxf0735xi5knj16axnc2gbyvr4p7xmg92k"))))))
     (home-page "https://github.com/angr/angr")
     (synopsis "Multi-architecture binary analysis toolkit")
     (description

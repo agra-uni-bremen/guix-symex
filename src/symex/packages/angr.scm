@@ -201,6 +201,53 @@ common library subroutines in disassembled binaries.")
 interactions with lists of Python objects.")
     (license license:bsd-2)))
 
+(define-public python-nanobind
+  (package
+    (name "python-nanobind")
+    (version "1.9.2")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+             (recursive? #t)
+             (url "https://github.com/wjakob/nanobind")
+             (commit (string-append "v" version))))
+       (sha256
+         (base32 "1aqdl533w3zc72hi73khxy5jh93x2lzmik86q6d864gc1smh7k7a"))))
+    (build-system pyproject-build-system)
+    (native-inputs (list cmake))
+    (home-page "https://github.com/wjakob/nanobind")
+    (synopsis "Provides tiny and efficient C++/Python bindings")
+    (description "binding library that exposes C++ types in Python and vice
+versa.  It is reminiscent of Boost.Python and pybind11 and uses near-identical
+syntax.")
+    (license license:bsd-3)))
+
+(define-public python-pypcode
+  (package
+    (name "python-pypcode")
+    (version "2.0.0")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (pypi-uri "pypcode" version))
+       (sha256
+        (base32 "16533psi2rvfk6lxn4m2dk07v1m6skpz30vv0rwml85v5irqrv9h"))))
+    (build-system pyproject-build-system)
+    (arguments
+     `(#:phases (modify-phases %standard-phases
+                  (replace 'check
+                    (lambda* (#:key tests? #:allow-other-keys)
+                      (when tests?
+                        (with-directory-excursion "tests"
+                          (invoke "python" "-m" "unittest"))))))))
+    (native-inputs (list cmake))
+    (inputs (list python-nanobind))
+    (home-page "https://github.com/angr/pypcode")
+    (synopsis "Machine code disassembly and IR translation library")
+    (description "Machine code disassembly and IR translation library")
+    (license (list license:bsd-2 license:asl2.0))))
+
 (define-public python-pysmt
   (package
     (name "python-pysmt")
@@ -452,7 +499,8 @@ extracting type information.")
     (source
      (origin
        (method git-fetch)
-       (patches (search-patches "patches/python-angr-check-exec-deps.patch"))
+       (patches (search-patches "patches/python-angr-check-exec-deps.patch"
+                                "patches/python-angr-pcode-riscv32-support.patch"))
        (uri (git-reference
              (url "https://github.com/angr/angr")
              (commit (string-append "v" version))))

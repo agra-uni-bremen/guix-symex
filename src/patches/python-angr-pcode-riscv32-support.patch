@@ -1,0 +1,24 @@
+From 1a7a0f8142cdd8a08544d45eb0cf34afce9e098c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?S=C3=B6ren=20Tempel?= <tempel@uni-bremen.de>
+Date: Fri, 26 Apr 2024 18:44:18 +0200
+Subject: [PATCH] angr: add support for 32-bit RISC-V calling convention
+
+In terms of the calling convention, there are no differences between
+rv64 and rv32. Hence, adding rv32 to the list should suffice.
+---
+ angr/engines/pcode/cc.py | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/angr/engines/pcode/cc.py b/angr/engines/pcode/cc.py
+index 869738686..aa298a3a6 100644
+--- a/angr/engines/pcode/cc.py
++++ b/angr/engines/pcode/cc.py
+@@ -96,6 +96,8 @@ def register_pcode_arch_default_cc(arch: ArchPcode):
+         # we have a bunch of manually specified mappings
+         manual_cc_mapping = {
+             "68000:BE:32:default": SimCCM68k,
++            "RISCV:LE:32:RV32G": SimCCRISCV,
++            "RISCV:LE:32:RV32GC": SimCCRISCV,
+             "RISCV:LE:64:RV64G": SimCCRISCV,
+             "RISCV:LE:64:RV64GC": SimCCRISCV,
+             "sparc:BE:32:default": SimCCSPARC,

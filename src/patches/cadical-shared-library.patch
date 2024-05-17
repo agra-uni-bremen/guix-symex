@@ -1,0 +1,82 @@
+Taken from Fedora: https://src.fedoraproject.org/rpms/cadical/blob/rawhide/f/cadical-shared.patch
+
+See also: https://github.com/arminbiere/cadical/issues/40
+
+diff --git a/makefile.in b/makefile.in
+index 1a21bff..ba07560 100644
+--- a/makefile.in
++++ b/makefile.in
+@@ -9,6 +9,7 @@
+ 
+ CXX=@CXX@
+ CXXFLAGS=@CXXFLAGS@
++CXXFLAGS+=-fPIC
+ 
+ LIBS=@LIBS@
+ 
+@@ -26,7 +27,7 @@ COMPILE=$(CXX) $(CXXFLAGS) -I$(DIR)
+ 
+ #--------------------------------------------------------------------------#
+ 
+-all: libcadical.a cadical mobical
++all: libcadical.so cadical mobical
+ 
+ #--------------------------------------------------------------------------#
+ 
+@@ -40,11 +41,17 @@ all: libcadical.a cadical mobical
+ # Application binaries (the stand alone solver 'cadical' and the model based
+ # tester 'mobical') and the library are the main build targets.
+ 
+-cadical: cadical.o libcadical.a makefile
+-	$(COMPILE) -o $@ $< -L. -lcadical $(LIBS)
++cadical: cadical.o libcadical.so makefile
++	$(COMPILE) -o $@ $< $(LDFLAGS) -L. -lcadical $(LIBS)
+ 
+-mobical: mobical.o libcadical.a makefile $(LIBS)
+-	$(COMPILE) -o $@ $< -L. -lcadical
++mobical: mobical.o libcadical.so makefile $(LIBS)
++	$(COMPILE) -o $@ $< $(LDFLAGS) -L. -lcadical
++
++libcadical.so: $(OBJ) makefile
++	rm -f $@
++	$(COMPILE) -shared -Wl,-h,libcadical.so.0 -o libcadical.so.0.0.0 $(LDFLAGS) $(OBJ)
++	ln -s libcadical.so.0.0.0 libcadical.so.0
++	ln -s libcadical.so.0 $@
+ 
+ libcadical.a: $(OBJ) makefile
+ 	ar rc $@ $(OBJ)
+@@ -53,7 +60,7 @@ libcadical.a: $(OBJ) makefile
+ 
+ # Note that 'build.hpp' is generated and resides in the build directory.
+ 
+-build.hpp: always
++build.hpp:
+ 	../scripts/make-build-header.sh > build.hpp
+ 
+ version.o: build.hpp
+@@ -85,8 +92,8 @@ clean:
+ 	rm -f *.gcda *.gcno *.gcov gmon.out
+ 
+ test: all
+-	CADICALBUILD="$(DIR)" $(MAKE) -j1 -C ../test
++	LD_LIBRARY_PATH=$(shell pwd) CADICALBUILD="$(DIR)" $(MAKE) -j1 -C ../test
+ 
+ #--------------------------------------------------------------------------#
+ 
+-.PHONY: all always analyze clean test update format
++.PHONY: all analyze clean test update format
+diff --git a/test/api/run.sh b/test/api/run.sh
+index 2f5df1d..70687af 100755
+--- a/test/api/run.sh
++++ b/test/api/run.sh
+@@ -28,8 +28,8 @@ die "needs to be called from a top-level sub-directory of CaDiCaL"
+ [ -f "$CADICALBUILD/makefile" ] || \
+   die "can not find '$CADICALBUILD/makefile' (run 'configure' first)"
+ 
+-[ -f "$CADICALBUILD/libcadical.a" ] || \
+-  die "can not find '$CADICALBUILD/libcadical.a' (run 'make' first)"
++[ -f "$CADICALBUILD/libcadical.so" ] || \
++  die "can not find '$CADICALBUILD/libcadical.so' (run 'make' first)"
+ 
+ cecho -n "$HILITE"
+ cecho "---------------------------------------------------------"

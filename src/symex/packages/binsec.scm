@@ -2,10 +2,20 @@
   #:use-module (guix packages)
   #:use-module (guix download)
   #:use-module (guix gexp)
+  #:use-module (guix utils)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (guix git-download)
+  #:use-module (guix build-system gnu)
+  #:use-module (guix build-system copy)
   #:use-module (guix build-system dune)
   #:use-module (guix build-system ocaml)
+  #:use-module (guix build-system meson)
+  #:use-module (gnu packages)
+  #:use-module (gnu packages check)
+  #:use-module (gnu packages version-control)
+  #:use-module (gnu packages maths)
+  #:use-module (gnu packages python)
+  #:use-module (gnu packages pkg-config)
   #:use-module (gnu packages multiprecision)
   #:use-module (gnu packages ocaml))
 
@@ -221,3 +231,52 @@ at the intersection of formal methods, program analysis security and
 software engineering.")
     (home-page "https://binsec.github.io/")
     (license license:lgpl2.1)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define-public cadical
+  (package
+    (name "cadical")
+    (version "1.9.5")
+    (source
+     (origin
+       (method git-fetch)
+       (patches (search-patches "patches/cadical-shared-library.patch"))
+       (uri (git-reference
+             (url "https://github.com/arminbiere/cadical")
+             (commit (string-append "rel-" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "0vxky42s6md6ys85jkm5p1nnryrx9hafdc5l8fqfqpx3qp7sw0lq"))))
+    (build-system gnu-build-system)
+    (arguments
+     (list
+      #:test-target "test"
+      #:make-flags #~(list (string-append "CXX="
+                                          #$(cxx-for-target))
+                           (string-append "LDFLAGS=-Wl,-rpath="
+                                          (assoc-ref %outputs "out") "/lib"))
+      #:phases #~(modify-phases %standard-phases
+                   (replace 'configure
+                     (lambda _
+                       (invoke "./configure")))
+                   (replace 'install
+                     (lambda* (#:key outputs #:allow-other-keys)
+                       (let* ((outdir (assoc-ref outputs "out"))
+                              (incdir (string-append outdir "/include"))
+                              (libdir (string-append outdir "/lib"))
+                              (bindir (string-append outdir "/bin")))
+                         (install-file "build/cadical" bindir)
+                         (install-file "build/mobical" bindir)
+                         (install-file "src/ccadical.h" incdir)
+                         (install-file "src/cadical.hpp" incdir)
+                         (install-file "build/libcadical.so" libdir)
+                         (install-file "build/libcadical.so.0" libdir)
+                         (install-file "build/libcadical.so.0.0.0" libdir)))))))
+    (synopsis "A simplified satisfiability solver")
+    (description
+     "CaDiCaL is a solver for the boolean satisfiability problem which utilizes
+@acronym{CDCL, Conflict-driven clause learning}. In comparison to existing solvers,
+it supposed to be easy to modify and extend.")
+    (home-page "https://github.com/arminbiere/cadical")
+    (license license:expat)))

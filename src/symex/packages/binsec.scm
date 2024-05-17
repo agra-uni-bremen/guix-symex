@@ -280,3 +280,61 @@ software engineering.")
 it supposed to be easy to modify and extend.")
     (home-page "https://github.com/arminbiere/cadical")
     (license license:expat)))
+
+(define-public symfpu
+  (let ((commit "c3acaf62b137c36aae5eb380f1d883bfa9095f60"))
+    (package
+      (name "symfpu")
+      (version (git-version "20190518" "0" commit))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/martin-cs/symfpu")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "0wfx11a1fb2fd6zvz5b1w9l4ypqbnqvmmijfxp0hjcrm7id19v52"))))
+      (build-system copy-build-system)
+      (arguments
+       (list
+        #:phases #~(modify-phases %standard-phases
+                     (delete 'configure)
+                     (replace 'install
+                       (lambda* (#:key outputs #:allow-other-keys)
+                         (let* ((outdir (assoc-ref outputs "out"))
+                                (incdir (string-append outdir
+                                                       "/include/symfpu"))
+                                (libdir (string-append outdir "/lib"))
+
+                                (coredir (string-append incdir "/core"))
+                                (utilsdir (string-append incdir "/utils")))
+                           (mkdir-p coredir)
+                           (mkdir-p utilsdir)
+                           (copy-recursively "core" coredir)
+                           (copy-recursively "utils" utilsdir)
+                           (delete-file (string-append coredir "/Makefile"))
+                           (delete-file (string-append utilsdir "/Makefile"))
+                           (mkdir-p (string-append libdir "/pkgconfig"))
+                           (with-output-to-file (string-append libdir
+                                                 "/pkgconfig/symfpu.pc")
+                             (lambda _
+                               (format #t
+                                "prefix=~a~@
+                                      exec_prefix=${prefix}~@
+                                      includedir=${prefix}/include~@
+                                      ~@
+                                      ~@
+                                      Name: symfpu~@
+                                      Version: ~a~@
+                                      Description: an implementation of IEEE-754 floating-point numbers~@
+                                      Cflags: -I${includedir}~%"
+                                outdir
+                                #$version)))))))))
+      (synopsis
+       "A concrete and symbolic implementation of IEEE-754 floating-point numbers")
+      (description
+       "This library provides a C++ implementation of concrete and symbolic semantics
+for floating point numbers as defined in IEEE Standard for Floating-Point Arithmetic (IEEE 754).")
+      (home-page "https://github.com/martin-cs/symfpu")
+      (license license:gpl3))))

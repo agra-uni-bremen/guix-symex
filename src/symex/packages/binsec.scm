@@ -338,3 +338,43 @@ it supposed to be easy to modify and extend.")
 for floating point numbers as defined in IEEE Standard for Floating-Point Arithmetic (IEEE 754).")
       (home-page "https://github.com/martin-cs/symfpu")
       (license license:gpl3))))
+
+(define-public bitwuzla
+  (package
+    (name "bitwuzla")
+    (version "0.4.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://github.com/bitwuzla/bitwuzla")
+             (commit version)))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "1qphw7cgq1y4bhnikafq6f57zg40yv13j867qbc0lbvmd7i5aiv4"))))
+    (build-system meson-build-system)
+    (arguments
+     ;; TODO: Enable tests
+     `(#:tests? #f
+       #:configure-flags '("-Dtesting=enabled" "-Ddefault_library=shared"
+                           "-Dkissat=true")
+       #:phases (modify-phases %standard-phases
+                  (add-after 'unpack 'make-git-optional
+                    (lambda _
+                      (substitute* "src/meson.build"
+                        (("find_program\\('git'\\)")
+                         "find_program('git', required: false)")))))))
+    (native-inputs (list pkg-config
+                         googletest
+                         python
+                         gmp
+                         cadical
+                         symfpu
+                         kissat))
+    (synopsis "SMT solver optimized for the theory of bit-vectors")
+    (description
+     "@acronym{SMT, Satisfiability Modulo Theories} solver for the
+theories of fixed-size bit-vectors, floating-point arithmetic, arrays,
+uninterpreted functions and their combinations.")
+    (home-page "https://bitwuzla.github.io/")
+    (license license:expat)))

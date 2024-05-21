@@ -273,10 +273,10 @@ software engineering.")
                          (install-file "build/libcadical.so" libdir)
                          (install-file "build/libcadical.so.0" libdir)
                          (install-file "build/libcadical.so.0.0.0" libdir)))))))
-    (synopsis "A simplified satisfiability solver")
+    (synopsis "Simplified CDCL-based satisfiability solver")
     (description
      "CaDiCaL is a solver for the boolean satisfiability problem which utilizes
-@acronym{CDCL, Conflict-driven clause learning}. In comparison to existing solvers,
+@acronym{CDCL, Conflict-driven clause learning}.  In comparison to existing solvers,
 it supposed to be easy to modify and extend.")
     (home-page "https://github.com/arminbiere/cadical")
     (license license:expat)))

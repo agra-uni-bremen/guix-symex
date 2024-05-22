@@ -17,12 +17,13 @@
   #:use-module (gnu packages python)
   #:use-module (gnu packages pkg-config)
   #:use-module (gnu packages multiprecision)
-  #:use-module (gnu packages ocaml))
+  #:use-module (gnu packages ocaml)
+  #:use-module (gnu packages maths))
 
 (define-public binsec-next
   (package
     (name "binsec-next")
-    (version "0.8.2")
+    (version "0.9.1")
     (source
      (origin
        (method git-fetch)
@@ -31,7 +32,7 @@
              (commit version)))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1k6prp2nc9whvxxnnqpg0f5pr7arikwv2bhzna5yq6v629i70c7q"))))
+        (base32 "07ks8dpizc2wr6250js7vh8cc1yvbpv7j0swyg66j1mqh1agdnbh"))))
     (build-system dune-build-system)
     (native-inputs (list gmp ocaml-qcheck ocaml-ounit2))
     (propagated-inputs (list dune-site
@@ -40,7 +41,9 @@
                              ocaml-graph
                              ocaml-zarith
                              ocaml-grain-dypgen
-                             ocaml-toml))
+                             ocaml-toml
+                             ocaml-z3
+                             z3))
     (synopsis "Binary-level analysis platform")
     (description
      "BINSEC is a binary analysis platform which implements analysis

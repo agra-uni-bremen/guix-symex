@@ -15,6 +15,7 @@ Currently, the following symbolic execution engines are packaged:
 * [angr]: A Python framework for symbolic execution of software in binary form.
 * [BINSEC]: Binary-level symbolic execution platform.
 * [SymEx-VP]: Symbolic execution of [RISC-V] binaries with support for [SystemC] hardware models.
+* [BinSym]: A symbolic executor for [RISC-V] binaries which uses a formal model of the RISC-V ISA.
 
 More packages will be added in the future.
 Furthermore, patches adding additional additional symbolic execution engines are more than welcome.
@@ -104,6 +105,7 @@ with this program. If not, see <https://www.gnu.org/licenses/>.
 [LLVM]: https://llvm.org/
 [KLEE]: https://klee.github.io/
 [SymEx-VP]: https://github.com/agra-uni-bremen/symex-vp
+[BinSym]: https://github.com/agra-uni-bremen/binsym
 [RISC-V]: https://riscv.org/
 [SystemC]: https://systemc.org
 [angr]: https://angr.io

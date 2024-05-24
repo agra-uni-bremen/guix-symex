@@ -97,13 +97,13 @@
 (define-public ghc-melf
   (package
     (name "ghc-melf")
-    (version "1.3.0")
+    (version "1.3.1")
     (source
      (origin
        (method url-fetch)
        (uri (hackage-uri "melf" version))
        (sha256
-        (base32 "1fk439y6ykdfn36vk1b09x7abp2pin7iw0a73dqxgafagqxp8sqx"))))
+        (base32 "0ivfzsw36qy0m93h353r3963vmhirzg3a5mirqn1hfbsk24xf1dx"))))
     (build-system haskell-build-system)
     (properties '((upstream-name . "melf")))
     (inputs (list ghc-lens ghc-prettyprinter ghc-optparse-applicative))

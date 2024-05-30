@@ -29,12 +29,11 @@
      `(#:cabal-revision ("10"
                          "18d14fasp1l5xdfgp8swgcyyjd3irqj19cn298ksx9wiw43j818p")))
     (home-page "https://github.com/ku-fpg/natural-transformation")
-    (synopsis "A natural transformation package.")
+    (synopsis "Natural transformation for containers")
     (description
-     "This package provides a natural transformation transforms a container @@f a@@
-  into another container @@g a@@.  Natural transformations act as functor
-  morphisms in category theory. .  The naming of ~>', :~> and $$ were taken, with
-  permission, from Edward Kmett's @@indexed@@ package.")
+     "This package provides a natural transformation transforms a container
+into another container.  Natural transformations act as functor morphisms in
+category theory.")
     (license license:bsd-3)))
 
 (define-public ghc-freer-simple
@@ -53,17 +52,10 @@
     (native-inputs (list ghc-quickcheck ghc-tasty ghc-tasty-hunit
                          ghc-tasty-quickcheck))
     (home-page "https://github.com/lexi-lambda/freer-simple")
-    (synopsis "A friendly effect system for Haskell.")
+    (synopsis "Friendly effect system for Haskell")
     (description
-     "An implementation of an effect system for Haskell (a fork of
-  <http://hackage.haskell.org/package/freer-effects freer-effects>), which is
-  based on the work of Oleg Kiselyov et al.: . *
-  <http://okmij.org/ftp/Haskell/extensible/more.pdf Freer Monads, More Extensible
-  Effects> * <http://okmij.org/ftp/Haskell/zseq.pdf Reflection without Remorse> *
-  <http://okmij.org/ftp/Haskell/extensible/exteff.pdf Extensible Effects> .  The
-  key features are: . * An efficient effect system for Haskell - as a library! *
-  Reimplementations of several common Haskell monad transformers as effects. *
-  Core components for defining your own Effects.")
+     "An implementation of an effect system for Haskell based on the works
+of Oleg Kiselyov et al. on freer monads.")
     (license license:bsd-3)))
 
 (define-public ghc-data-array-byte
@@ -86,12 +78,8 @@
     (home-page "https://github.com/Bodigrim/data-array-byte")
     (synopsis "Compatibility layer for Data.Array.Byte")
     (description
-     "Compatibility layer for
-  [Data.Array.Byte](https://hackage.haskell.org/package/base/docs/Data-Array-Byte.html),
-  providing boxed wrappers for @@ByteArray#@@ and @@MutableByteArray#@@ and
-  relevant instances for GHC < 9.4.  Include it into your Cabal file: . >
-  build-depends: base > if impl(ghc < 9.4) > build-depends: data-array-byte .  and
-  then @@import Data.Array.Byte@@ unconditionally.")
+     "Compatibility layer for Data.Array.Byte, providing boxed wrappers for
+ByteArray and MutableByteArray as well as relevant instances for GHC < 9.4.")
     (license license:bsd-3)))
 
 (define-public ghc-melf
@@ -116,8 +104,9 @@
                          ghc-tasty-golden
                          ghc-tasty-hunit))
     (home-page "https://github.com/aleksey-makarov/melf")
-    (synopsis "An Elf parser")
-    (description "Parser for ELF object format")
+    (synopsis "Monadic Elf parser for Haskell")
+    (description "Monadic parser for the @acronym{ELF, Executable and Linkable
+Format} object format.")
     (license license:bsd-3)))
 
 (define-public ghc-filepath
@@ -135,26 +124,8 @@
     (native-inputs (list ghc-quickcheck ghc-quickcheck ghc-quickcheck
                          ghc-quickcheck ghc-quickcheck-classes-base))
     (home-page "https://github.com/haskell/filepath/blob/master/README.md")
-    (synopsis "Library for manipulating FilePaths in a cross platform way.")
-    (description
-     "This package provides functionality for manipulating @@FilePath@@ values, and is
-  shipped with <https://www.haskell.org/ghc/ GHC>.  It provides two variants for
-  filepaths: .  1.  legacy filepaths: @@type FilePath = String@@ .  2.  operating
-  system abstracted filepaths (@@OsPath@@): internally unpinned
-  @@ShortByteString@@ (platform-dependent encoding) .  It is recommended to use
-  @@OsPath@@ when possible, because it is more correct. .  For each variant there
-  are three main modules: . * \"System.FilePath.Posix\" / \"System.OsPath.Posix\"
-  manipulates POSIX\\/Linux style @@FilePath@@ values (with @@\\/@@ as the path
-  separator). . * \"System.FilePath.Windows\" / \"System.OsPath.Windows\" manipulates
-  Windows style @@FilePath@@ values (with either @@\\\\@@ or @@\\/@@ as the path
-  separator, and deals with drives). . * \"System.FilePath\" / \"System.OsPath\" for
-  dealing with current platform-specific filepaths . \"System.OsString\" is like
-  \"System.OsPath\", but more general purpose.  Refer to the documentation of those
-  modules for more information. .  An introduction into the new API can be found
-  in this
-  <https://hasufell.github.io/posts/2022-06-29-fixing-haskell-filepaths.html blog
-  post>.  Code examples for the new API can be found
-  <https://github.com/hasufell/filepath-examples here>.")
+    (synopsis "Library for manipulating FilePaths in a cross platform way")
+    (description "This library provides functionality for manipulating FilePath values")
     (license license:bsd-3)))
 
 (define-public ghc-bv
@@ -189,15 +160,10 @@
     (home-page "http://hackage.haskell.org/package/deepseq")
     (synopsis "Deep evaluation of data structures")
     (description
-     "This package provides methods for fully evaluating data structures (\\\"deep
-  evaluation\\\").  Deep evaluation is often used for adding strictness to a
-  program, e.g. in order to force pending exceptions, remove space leaks, or force
-  lazy I/O to happen.  It is also useful in parallel programs, to ensure pending
-  work does not migrate to the wrong thread. .  The primary use of this package is
-  via the deepseq function, a \\\"deep\\\" version of seq'.  It is implemented on top
-  of an NFData typeclass (\\\"Normal Form Data\\\", data structures with no
-  unevaluated components) which defines strategies for fully evaluating different
-  data types.  See module documentation in \"Control.DeepSeq\" for more details.")
+     "This package provides methods for fully evaluating data structures (deep
+evaluation).  Deep evaluation is often used for adding strictness to a program,
+e.g. in order to force pending exceptions, remove space leaks, or force lazy
+I/O to happen.")
     (license license:bsd-3)))
 
 (define-public ghc-hedgehog-classes
@@ -227,12 +193,8 @@
     (home-page "https://github.com/hedgehogqa/haskell-hedgehog-classes")
     (synopsis "Hedgehog will eat your typeclass bugs")
     (description
-     "This library provides Hedgehog properties to ensure that typeclass instances
-  adhere to the set of laws that they are supposed to.  There are other libraries
-  that do similar things, such as `genvalidity-hspec` and `checkers`.  This
-  library differs from other solutions by not introducing any new typeclasses that
-  the user needs to learn, and otherwise minimal API overhead. .  This library is
-  directly inspired by `quickcheck-classes`.")
+     "This library provides Hedgehog properties to ensure that typeclass
+instances adhere to the set of laws that they are supposed to.")
     (license license:bsd-3)))
 
 (define-public ghc-parameterized-utils
@@ -269,10 +231,11 @@
     (synopsis
      "Classes and data structures for working with data-kind indexed types")
     (description
-     "This package contains collection classes and type representations used for
-  working with values that have a single parameter.  It's intended for things like
-  expression libraries where one wishes to leverage the Haskell type-checker to
-  improve type-safety by encoding the object language type system into data kinds.")
+     "This package contains collection classes and type representations used
+for working with values that have a single parameter.  It's intended for things
+like expression libraries where one wishes to leverage the Haskell type-checker
+to improve type-safety by encoding the object language type system into data
+kinds.")
     (license license:bsd-3)))
 
 (define-public ghc-libriscv
@@ -284,7 +247,7 @@
        (origin
          (method git-fetch)
          (uri (git-reference
-               (url "https://github.com/agra-uni-bremen/libriscv.git")
+               (url "https://github.com/agra-uni-bremen/libriscv")
                (commit commit)))
          (file-name (git-file-name name version))
          (sha256

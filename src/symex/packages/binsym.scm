@@ -181,13 +181,13 @@ instances adhere to the set of laws that they are supposed to.")
 (define-public ghc-parameterized-utils
   (package
     (name "ghc-parameterized-utils")
-    (version "2.1.6.0")
+    (version "2.1.8.0")
     (source
      (origin
        (method url-fetch)
        (uri (hackage-uri "parameterized-utils" version))
        (sha256
-        (base32 "118inzvvr72bfr1pzgxglrpd2fsz0kn9hk791imygl0fv1258rb6"))))
+        (base32 "026lrdnw5rjvny380rmrzpwhmcfgp551whbk0mnx2y2q6ij0sjfm"))))
     (build-system haskell-build-system)
     (properties '((upstream-name . "parameterized-utils")))
     (inputs (list ghc-base-orphans
@@ -205,9 +205,6 @@ instances adhere to the set of laws that they are supposed to.")
                          ghc-tasty-hunit
                          ghc-tasty-hedgehog
                          ghc-hedgehog-classes))
-    (arguments
-     `(#:cabal-revision ("1"
-                         "126p5f4craqwlzqpj0rbrnrl83ykvkb8w6lz3sg4m9d91sqixfrh")))
     (home-page "https://github.com/GaloisInc/parameterized-utils")
     (synopsis
      "Classes and data structures for working with data-kind indexed types")

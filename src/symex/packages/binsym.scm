@@ -109,25 +109,6 @@ ByteArray and MutableByteArray as well as relevant instances for GHC < 9.4.")
 Format} object format.")
     (license license:bsd-3)))
 
-(define-public ghc-filepath
-  (package
-    (name "ghc-filepath")
-    (version "1.4.100.4")
-    (source
-     (origin
-       (method url-fetch)
-       (uri (hackage-uri "filepath" version))
-       (sha256
-        (base32 "1bg9jr7nr6ki62d1srqvjlvrylq29zj8qi75kl7xybvw6i8651w2"))))
-    (build-system haskell-build-system)
-    (properties '((upstream-name . "filepath")))
-    (native-inputs (list ghc-quickcheck ghc-quickcheck ghc-quickcheck
-                         ghc-quickcheck ghc-quickcheck-classes-base))
-    (home-page "https://github.com/haskell/filepath/blob/master/README.md")
-    (synopsis "Library for manipulating FilePaths in a cross platform way")
-    (description "This library provides functionality for manipulating FilePath values")
-    (license license:bsd-3)))
-
 (define-public ghc-bv
   (package
     (name "ghc-bv")
@@ -257,8 +238,7 @@ kinds.")
        (list
         #:tests? #f
         #:haddock? #f))
-      (inputs (list ghc-filepath
-                    ghc-template-haskell
+      (inputs (list ghc-template-haskell
                     ghc-file-embed
                     ghc-extra
                     ghc-yaml

@@ -239,7 +239,7 @@ kinds.")
     (license license:bsd-3)))
 
 (define-public ghc-libriscv
-  (let ((commit "d7560f0aea8a5726a0bc1938f762f38b063a61a4"))
+  (let ((commit "fb3a8b992622e04b5cbf70e3726e4627bf639a6f"))
     (package
       (name "ghc-libriscv")
       (version (git-version "20240521" "0" commit))
@@ -303,7 +303,7 @@ kinds.")
       (license license:bsd-3))))
 
 (define-public ghc-binsym
-  (let ((commit "e0ad55fb6b256e95fbed97be62d85521a189414e"))
+  (let ((commit "3a824003edbea8fe86b67e52ff3bf6ddd1ccc8a3"))
     (package
       (name "ghc-binsym")
       (version (git-version "20240524" "0" commit))
@@ -315,7 +315,7 @@ kinds.")
                (commit commit)))
          (file-name (git-file-name name version))
          (sha256
-          (base32 "1l3n1s43xpx46nsz8mjagp8wpyr8jfg54l44zxmxbxsmm2bzi4rg"))))
+          (base32 "107j3ajqzq7nf41aijxidar5qqb7sqnq9sn8mi5nnc48g8bii66j"))))
       (build-system haskell-build-system)
       (arguments
        (list
